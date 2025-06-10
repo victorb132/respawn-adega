@@ -7,6 +7,7 @@ import { useCart } from '@/contexts/CartContext';
 
 interface ProductCardProps {
   product: Product;
+  onAddToCart?: (product: Product) => void;
 }
 
 export default function ProductCard({ product }: ProductCardProps) {
