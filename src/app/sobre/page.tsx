@@ -1,3 +1,4 @@
+import Link from "next/link";
 
 export default function SobrePage() {
   return (
@@ -191,18 +192,18 @@ export default function SobrePage() {
             Junte-se a milhares de clientes satisfeitos e descubra por que somos a escolha certa para suas bebidas
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a
-              href="/"
+            <Link
+              href="/catalogo"
               className="bg-white text-amber-600 hover:bg-gray-100 px-8 py-4 rounded-lg font-semibold text-lg transition-colors shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-200"
             >
               Explorar Produtos
-            </a>
-            <a
+            </Link>
+            <Link
               href="/contato"
               className="border-2 border-white text-white hover:bg-white hover:text-amber-600 px-8 py-4 rounded-lg font-semibold text-lg transition-colors"
             >
               Entre em Contato
-            </a>
+            </Link>
           </div>
         </div>
       </section>
