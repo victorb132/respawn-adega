@@ -1,8 +1,8 @@
-# DrinkShop - Loja de Bebidas Online
+# Respawn Adega - Loja de Bebidas Online
 
 ## Descrição do Projeto
 
-A DrinkShop é um site completo de e-commerce para uma loja de bebidas, desenvolvido com Next.js 15, TypeScript e Tailwind CSS. O projeto apresenta um design moderno, responsivo e funcional, com catálogo de produtos, sistema de busca e filtros.
+A Respawn Adega é um site completo de e-commerce para uma loja de bebidas, desenvolvido com Next.js 15, TypeScript e Tailwind CSS. O projeto apresenta um design moderno, responsivo e funcional, com catálogo de produtos, sistema de busca e filtros.
 
 ## Tecnologias Utilizadas
 

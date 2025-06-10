@@ -1,22 +1,27 @@
-
 'use client';
 
 import { Product } from '@/types';
 import Image from 'next/image';
 import { useState } from 'react';
+import { useCart } from '@/contexts/CartContext';
 
 interface ProductCardProps {
   product: Product;
-  onAddToCart?: (product: Product) => void;
 }
 
-export default function ProductCard({ product, onAddToCart }: ProductCardProps) {
+export default function ProductCard({ product }: ProductCardProps) {
   const [imageError, setImageError] = useState(false);
+  const [isAdding, setIsAdding] = useState(false);
+  const { addToCart, getItemQuantity } = useCart();
 
-  const handleAddToCart = () => {
-    if (onAddToCart) {
-      onAddToCart(product);
-    }
+  const handleAddToCart = async () => {
+    setIsAdding(true);
+    addToCart(product);
+
+    // Simular um pequeno delay para feedback visual
+    setTimeout(() => {
+      setIsAdding(false);
+    }, 500);
   };
 
   const formatPrice = (price: number) => {
@@ -59,6 +64,8 @@ export default function ProductCard({ product, onAddToCart }: ProductCardProps) 
     return stars;
   };
 
+  const itemQuantity = getItemQuantity(product.id);
+
   return (
     <div className="bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 overflow-hidden group">
       {/* Product Image */}
@@ -92,6 +99,15 @@ export default function ProductCard({ product, onAddToCart }: ProductCardProps) 
             </span>
           )}
         </div>
+
+        {/* Quantity in Cart */}
+        {itemQuantity > 0 && (
+          <div className="absolute top-3 right-3">
+            <span className="bg-green-500 text-white px-2 py-1 rounded-full text-xs font-semibold">
+              {itemQuantity} no carrinho
+            </span>
+          </div>
+        )}
 
         {/* Stock Status */}
         {!product.inStock && (
@@ -161,21 +177,29 @@ export default function ProductCard({ product, onAddToCart }: ProductCardProps) 
         {/* Add to Cart Button */}
         <button
           onClick={handleAddToCart}
-          disabled={!product.inStock}
-          className={`w-full py-3 px-4 rounded-lg font-semibold transition-all duration-200 ${product.inStock
-              ? 'bg-amber-600 hover:bg-amber-700 text-white shadow-md hover:shadow-lg transform hover:-translate-y-0.5'
-              : 'bg-gray-300 text-gray-500 cursor-not-allowed'
+          disabled={!product.inStock || isAdding}
+          className={`w-full py-3 px-4 rounded-lg font-semibold transition-all duration-200 ${product.inStock && !isAdding
+            ? 'bg-amber-600 hover:bg-amber-700 text-white shadow-md hover:shadow-lg transform hover:-translate-y-0.5'
+            : 'bg-gray-300 text-gray-500 cursor-not-allowed'
             }`}
         >
-          {product.inStock ? (
+          {!product.inStock ? (
+            'Indisponível'
+          ) : isAdding ? (
+            <span className="flex items-center justify-center gap-2">
+              <svg className="animate-spin w-4 h-4" fill="none" viewBox="0 0 24 24">
+                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
+              </svg>
+              Adicionando...
+            </span>
+          ) : (
             <span className="flex items-center justify-center gap-2">
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4m0 0L7 13m0 0l-2.5 5M7 13l2.5 5m0 0h8" />
               </svg>
-              Adicionar ao Carrinho
+              {itemQuantity > 0 ? 'Adicionar Mais' : 'Adicionar ao Carrinho'}
             </span>
-          ) : (
-            'Indisponível'
           )}
         </button>
       </div>

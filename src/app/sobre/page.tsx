@@ -1,14 +1,13 @@
-import Image from 'next/image';
 
 export default function SobrePage() {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-amber-50 to-orange-100 py-20">
+      <section className="bg-gradient-to-br background-default py-20">
         <div className="container mx-auto px-4">
           <div className="text-center max-w-4xl mx-auto">
             <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-6">
-              Sobre a <span className="text-amber-600">DrinkShop</span>
+              Sobre a <span className="text-amber-600">Respawn Adega</span>
             </h1>
             <p className="text-xl text-gray-600 leading-relaxed">
               Há mais de 10 anos oferecendo as melhores bebidas com qualidade,
@@ -28,7 +27,7 @@ export default function SobrePage() {
               </h2>
               <div className="space-y-4 text-gray-600 leading-relaxed">
                 <p>
-                  A DrinkShop nasceu em 2014 com o sonho de democratizar o acesso a bebidas
+                  A Respawn Adega nasceu em 2025 com o sonho de democratizar o acesso a bebidas
                   de qualidade. Começamos como uma pequena loja física no centro da cidade,
                   com uma seleção cuidadosa de cervejas artesanais e vinhos especiais.
                 </p>
@@ -45,7 +44,7 @@ export default function SobrePage() {
               </div>
             </div>
             <div className="relative">
-              <div className="bg-gradient-to-br from-amber-400 to-orange-500 rounded-3xl p-8 shadow-2xl">
+              <div className="bg-gradient-to-br background-default rounded-3xl p-8 shadow-2xl">
                 <div className="bg-white rounded-2xl p-8 text-center">
                   <div className="grid grid-cols-2 gap-6">
                     <div>
@@ -135,13 +134,13 @@ export default function SobrePage() {
               Nossa Equipe
             </h2>
             <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              Conheça as pessoas apaixonadas que fazem a DrinkShop acontecer
+              Conheça as pessoas apaixonadas que fazem a Respawn Adega acontecer
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="text-center">
-              <div className="w-32 h-32 bg-gradient-to-br from-amber-400 to-orange-500 rounded-full mx-auto mb-6 flex items-center justify-center">
+              <div className="w-32 h-32 bg-gradient-to-br background-default rounded-full mx-auto mb-6 flex items-center justify-center">
                 <svg className="w-16 h-16 text-white" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
                 </svg>
@@ -183,7 +182,7 @@ export default function SobrePage() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 bg-gradient-to-r from-amber-600 to-orange-600">
+      <section className="py-20 bg-gradient-to-r background-default">
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
             Faça Parte da Nossa História
@@ -193,7 +192,7 @@ export default function SobrePage() {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a
-              href="/catalogo"
+              href="/"
               className="bg-white text-amber-600 hover:bg-gray-100 px-8 py-4 rounded-lg font-semibold text-lg transition-colors shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-200"
             >
               Explorar Produtos

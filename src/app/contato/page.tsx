@@ -41,7 +41,7 @@ export default function ContatoPage() {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-amber-50 to-orange-100 py-20">
+      <section className="bg-gradient-to-br background-default py-20">
         <div className="container mx-auto px-4">
           <div className="text-center max-w-4xl mx-auto">
             <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-6">
@@ -107,8 +107,8 @@ export default function ContatoPage() {
                   <div>
                     <h3 className="text-lg font-semibold text-gray-900 mb-1">E-mail</h3>
                     <p className="text-gray-600">
-                      contato@drinkshop.com<br />
-                      vendas@drinkshop.com
+                      contato@respawnadega.com<br />
+                      vendas@respawnadega.com
                     </p>
                   </div>
                 </div>
@@ -263,8 +263,8 @@ export default function ContatoPage() {
                   type="submit"
                   disabled={isSubmitting}
                   className={`w-full py-4 px-6 rounded-lg font-semibold text-lg transition-all duration-200 ${isSubmitting
-                      ? 'bg-gray-400 cursor-not-allowed'
-                      : 'bg-amber-600 hover:bg-amber-700 shadow-lg hover:shadow-xl transform hover:-translate-y-1'
+                    ? 'bg-gray-400 cursor-not-allowed'
+                    : 'bg-amber-600 hover:bg-amber-700 shadow-lg hover:shadow-xl transform hover:-translate-y-1'
                     } text-white`}
                 >
                   {isSubmitting ? (
