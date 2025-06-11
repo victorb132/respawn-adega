@@ -31,6 +31,23 @@ export interface CartItem {
   quantity: number;
 }
 
+export interface DeliveryAddress {
+  street: string;
+  number: string;
+  complement?: string;
+  neighborhood: string;
+  city: string;
+  state: string;
+  zipCode: string;
+  reference?: string;
+}
+
+export interface CustomerInfo {
+  name: string;
+  phone: string;
+  address: DeliveryAddress;
+}
+
 export interface FilterOptions {
   categories: string[];
   priceRange: [number, number];

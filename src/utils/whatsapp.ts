@@ -1,10 +1,10 @@
-import { CartItem } from '@/types';
+import { CartItem, CustomerInfo } from '@/types';
 
 // Configurações do WhatsApp
 export const WHATSAPP_CONFIG = {
   // Substitua pelo número real da loja (formato: código do país + DDD + número)
-  phoneNumber: '5511956792908', // Exemplo: Brasil (55) + São Paulo (11) + número
-  businessName: 'Respawn Adega',
+  phoneNumber: '5511999999999', // Exemplo: Brasil (55) + São Paulo (11) + número
+  businessName: 'DrinkShop',
   businessAddress: 'Rua das Bebidas, 123 - Centro, São Paulo - SP',
   businessHours: 'Segunda a Sexta: 8h às 22h | Sábado: 8h às 20h',
 };
@@ -21,11 +21,7 @@ export const formatPrice = (price: number): string => {
 export const generateOrderMessage = (
   items: CartItem[],
   totalPrice: number,
-  customerInfo?: {
-    name?: string;
-    address?: string;
-    phone?: string;
-  }
+  customerInfo?: CustomerInfo
 ): string => {
   const itemsList = items.map(item => {
     const itemTotal = item.product.price * item.quantity;
@@ -37,19 +33,28 @@ export const generateOrderMessage = (
 
   let message = `🛒 *NOVO PEDIDO - ${WHATSAPP_CONFIG.businessName}*\n\n`;
 
-  if (customerInfo?.name) {
-    message += `👤 *Cliente:* ${customerInfo.name}\n`;
+  // Informações do cliente
+  if (customerInfo) {
+    message += `👤 *DADOS DO CLIENTE:*\n`;
+    message += `• Nome: ${customerInfo.name}\n`;
+    message += `• Telefone: ${customerInfo.phone}\n\n`;
+
+    message += `📍 *ENDEREÇO DE ENTREGA:*\n`;
+    message += `• ${customerInfo.address.street}, ${customerInfo.address.number}`;
+    if (customerInfo.address.complement) {
+      message += `, ${customerInfo.address.complement}`;
+    }
+    message += `\n`;
+    message += `• ${customerInfo.address.neighborhood}\n`;
+    message += `• ${customerInfo.address.city} - ${customerInfo.address.state}\n`;
+    message += `• CEP: ${customerInfo.address.zipCode}\n`;
+    if (customerInfo.address.reference) {
+      message += `• Referência: ${customerInfo.address.reference}\n`;
+    }
+    message += `\n`;
   }
 
-  if (customerInfo?.phone) {
-    message += `📱 *Telefone:* ${customerInfo.phone}\n`;
-  }
-
-  if (customerInfo?.address) {
-    message += `📍 *Endereço:* ${customerInfo.address}\n`;
-  }
-
-  message += `\n📦 *ITENS DO PEDIDO:*\n\n${itemsList}\n\n`;
+  message += `📦 *ITENS DO PEDIDO:*\n\n${itemsList}\n\n`;
   message += `📊 *RESUMO:*\n`;
   message += `• Total de itens: ${itemCount}\n`;
   message += `• Valor total: ${total}\n\n`;

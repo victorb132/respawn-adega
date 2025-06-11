@@ -1,11 +1,12 @@
 'use client';
 
 import React, { createContext, useContext, useReducer, useEffect } from 'react';
-import { Product, CartItem } from '@/types';
+import { Product, CartItem, CustomerInfo, DeliveryAddress } from '@/types';
 
 interface CartState {
   items: CartItem[];
   isOpen: boolean;
+  customerInfo: CustomerInfo | null;
 }
 
 interface CartContextType {
@@ -18,6 +19,8 @@ interface CartContextType {
   getTotalItems: () => number;
   getTotalPrice: () => number;
   getItemQuantity: (productId: string) => number;
+  updateCustomerInfo: (customerInfo: CustomerInfo) => void;
+  updateDeliveryAddress: (address: DeliveryAddress) => void;
 }
 
 type CartAction =
@@ -26,7 +29,9 @@ type CartAction =
   | { type: 'UPDATE_QUANTITY'; payload: { productId: string; quantity: number } }
   | { type: 'CLEAR_CART' }
   | { type: 'TOGGLE_CART' }
-  | { type: 'LOAD_CART'; payload: { items: CartItem[] } };
+  | { type: 'LOAD_CART'; payload: { items: CartItem[]; customerInfo?: CustomerInfo } }
+  | { type: 'UPDATE_CUSTOMER_INFO'; payload: { customerInfo: CustomerInfo } }
+  | { type: 'UPDATE_DELIVERY_ADDRESS'; payload: { address: DeliveryAddress } };
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
 
@@ -53,15 +58,15 @@ const cartReducer = (state: CartState, action: CartAction): CartState => {
     }
 
     case 'REMOVE_FROM_CART': {
-      const { productId } = action.payload;
       return {
         ...state,
-        items: state.items.filter(item => item.product.id !== productId)
+        items: state.items.filter(item => item.product.id !== action.payload.productId)
       };
     }
 
     case 'UPDATE_QUANTITY': {
       const { productId, quantity } = action.payload;
+
       if (quantity <= 0) {
         // Se a quantidade for 0 ou menor, remove o item
         return {
@@ -80,51 +85,92 @@ const cartReducer = (state: CartState, action: CartAction): CartState => {
       };
     }
 
-    case 'CLEAR_CART':
-      return { ...state, items: [] };
+    case 'CLEAR_CART': {
+      return {
+        ...state,
+        items: []
+      };
+    }
 
-    case 'TOGGLE_CART':
-      return { ...state, isOpen: !state.isOpen };
+    case 'TOGGLE_CART': {
+      return {
+        ...state,
+        isOpen: !state.isOpen
+      };
+    }
 
-    case 'LOAD_CART':
-      return { ...state, items: action.payload.items };
+    case 'LOAD_CART': {
+      return {
+        ...state,
+        items: action.payload.items,
+        customerInfo: action.payload.customerInfo || null
+      };
+    }
+
+    case 'UPDATE_CUSTOMER_INFO': {
+      return {
+        ...state,
+        customerInfo: action.payload.customerInfo
+      };
+    }
+
+    case 'UPDATE_DELIVERY_ADDRESS': {
+      return {
+        ...state,
+        customerInfo: state.customerInfo ? {
+          ...state.customerInfo,
+          address: action.payload.address
+        } : null
+      };
+    }
 
     default:
       return state;
   }
 };
 
-const initialState: CartState = {
-  items: [],
-  isOpen: false
-};
+export function CartProvider({ children }: { children: React.ReactNode }) {
+  const [state, dispatch] = useReducer(cartReducer, {
+    items: [],
+    isOpen: false,
+    customerInfo: null
+  });
 
-export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [state, dispatch] = useReducer(cartReducer, initialState);
-
-  // Carregar carrinho do localStorage quando o componente montar
+  // Carregar dados do localStorage quando o componente montar
   useEffect(() => {
-    const savedCart = localStorage.getItem('respawn-adega-cart');
+    const savedCart = localStorage.getItem('drinkshop-cart');
+    const savedCustomerInfo = localStorage.getItem('drinkshop-customer');
+
     if (savedCart) {
       try {
         const parsedCart = JSON.parse(savedCart);
-        dispatch({ type: 'LOAD_CART', payload: { items: parsedCart } });
+        const parsedCustomerInfo = savedCustomerInfo ? JSON.parse(savedCustomerInfo) : null;
+        dispatch({
+          type: 'LOAD_CART',
+          payload: {
+            items: parsedCart,
+            customerInfo: parsedCustomerInfo
+          }
+        });
       } catch (error) {
         console.error('Erro ao carregar carrinho do localStorage:', error);
       }
     }
   }, []);
 
-  // Salvar carrinho no localStorage sempre que o estado mudar
+  // Salvar no localStorage sempre que o carrinho mudar
   useEffect(() => {
-    localStorage.setItem('respawn-adega-cart', JSON.stringify(state.items));
+    localStorage.setItem('drinkshop-cart', JSON.stringify(state.items));
   }, [state.items]);
 
-  const addToCart = (product: Product, quantity: number = 1) => {
-    if (!product.inStock) {
-      alert('Produto fora de estoque!');
-      return;
+  // Salvar informações do cliente no localStorage
+  useEffect(() => {
+    if (state.customerInfo) {
+      localStorage.setItem('drinkshop-customer', JSON.stringify(state.customerInfo));
     }
+  }, [state.customerInfo]);
+
+  const addToCart = (product: Product, quantity: number = 1) => {
     dispatch({ type: 'ADD_TO_CART', payload: { product, quantity } });
   };
 
@@ -144,46 +190,50 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
     dispatch({ type: 'TOGGLE_CART' });
   };
 
-  const getTotalItems = (): number => {
+  const updateCustomerInfo = (customerInfo: CustomerInfo) => {
+    dispatch({ type: 'UPDATE_CUSTOMER_INFO', payload: { customerInfo } });
+  };
+
+  const updateDeliveryAddress = (address: DeliveryAddress) => {
+    dispatch({ type: 'UPDATE_DELIVERY_ADDRESS', payload: { address } });
+  };
+
+  const getTotalItems = () => {
     return state.items.reduce((total, item) => total + item.quantity, 0);
   };
 
-  const getTotalPrice = (): number => {
-    return state.items.reduce(
-      (total, item) => total + (item.product.price * item.quantity),
-      0
-    );
+  const getTotalPrice = () => {
+    return state.items.reduce((total, item) => total + (item.product.price * item.quantity), 0);
   };
 
-  const getItemQuantity = (productId: string): number => {
+  const getItemQuantity = (productId: string) => {
     const item = state.items.find(item => item.product.id === productId);
     return item ? item.quantity : 0;
   };
 
-  const contextValue: CartContextType = {
-    state,
-    addToCart,
-    removeFromCart,
-    updateQuantity,
-    clearCart,
-    toggleCart,
-    getTotalItems,
-    getTotalPrice,
-    getItemQuantity
-  };
-
   return (
-    <CartContext.Provider value={contextValue}>
+    <CartContext.Provider value={{
+      state,
+      addToCart,
+      removeFromCart,
+      updateQuantity,
+      clearCart,
+      toggleCart,
+      getTotalItems,
+      getTotalPrice,
+      getItemQuantity,
+      updateCustomerInfo,
+      updateDeliveryAddress
+    }}>
       {children}
     </CartContext.Provider>
   );
-};
+}
 
-export const useCart = (): CartContextType => {
+export function useCart() {
   const context = useContext(CartContext);
   if (context === undefined) {
     throw new Error('useCart deve ser usado dentro de um CartProvider');
   }
   return context;
 };
-
