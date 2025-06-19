@@ -127,7 +127,7 @@ export default function ProductCard({ product }: ProductCardProps) {
         {/* Category and Brand */}
         <div className="flex items-center justify-between mb-2">
           <span className="text-sm text-amber-600 font-medium capitalize">
-            {product.subcategory}
+            {product.category}
           </span>
           <span className="text-sm text-gray-500">
             {product.brand}
@@ -159,7 +159,7 @@ export default function ProductCard({ product }: ProductCardProps) {
             {renderStars(product.rating)}
           </div>
           <span className="text-sm text-gray-600">
-            {product.rating} ({product.reviewCount} avaliações)
+            {product.rating} avaliações
           </span>
         </div>
 
