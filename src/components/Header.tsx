@@ -21,22 +21,6 @@ export default function Header() {
             </div>
           </Link>
 
-          {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center space-x-8">
-            {/* <Link href="/" className="text-white hover:text-amber-200 transition-colors font-medium">
-              Início
-            </Link> */}
-            <Link href="/" className="text-white hover:text-amber-200 transition-colors font-medium">
-              Catálogo
-            </Link>
-            {/* <Link href="/sobre" className="text-white hover:text-amber-200 transition-colors font-medium">
-              Sobre
-            </Link> */}
-            <Link href="/contato" className="text-white hover:text-amber-200 transition-colors font-medium">
-              Contato
-            </Link>
-          </nav>
-
           {/* Cart and Mobile Menu Button */}
           <div className="flex items-center space-x-4">
             {/* Cart Icon */}
@@ -109,7 +93,7 @@ export default function Header() {
           </nav>
         )}
       </div>
-    </header>
+    </header >
   );
 }
 

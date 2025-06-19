@@ -1,0 +1,72 @@
+{
+  "Main": {
+    "uid": {
+      "type": "UID",
+      "config": {
+        "label": "UID",
+        "placeholder": "categoria-slug"
+      }
+    },
+    "name": {
+      "type": "Text",
+      "config": {
+        "label": "Nome da Categoria",
+        "placeholder": "Ex: Cervejas"
+      }
+    },
+    "description": {
+      "type": "Text",
+      "config": {
+        "label": "Descrição",
+        "placeholder": "Descrição da categoria"
+      }
+    },
+    "icon": {
+      "type": "Text",
+      "config": {
+        "label": "Ícone",
+        "placeholder": "🍺"
+      }
+    },
+    "color": {
+      "type": "Text",
+      "config": {
+        "label": "Cor",
+        "placeholder": "#f59e0b"
+      }
+    },
+    "image": {
+      "type": "Image",
+      "config": {
+        "constraint": {
+          "width": 400,
+          "height": 300
+        },
+        "thumbnails": [
+          {
+            "name": "thumbnail",
+            "width": 150,
+            "height": 150
+          }
+        ],
+        "label": "Imagem da Categoria"
+      }
+    },
+    "featured": {
+      "type": "Boolean",
+      "config": {
+        "placeholder_false": "Não",
+        "placeholder_true": "Sim",
+        "default_value": false,
+        "label": "Categoria em Destaque"
+      }
+    },
+    "sort_order": {
+      "type": "Number",
+      "config": {
+        "label": "Ordem de Exibição",
+        "placeholder": "1"
+      }
+    }
+  }
+}

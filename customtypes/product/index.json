@@ -1,0 +1,169 @@
+{
+  "Main": {
+    "uid": {
+      "type": "UID",
+      "config": {
+        "label": "UID",
+        "placeholder": "produto-slug"
+      }
+    },
+    "name": {
+      "type": "Text",
+      "config": {
+        "label": "Nome do Produto",
+        "placeholder": "Ex: Cerveja IPA Artesanal"
+      }
+    },
+    "description": {
+      "type": "Text",
+      "config": {
+        "label": "Descrição",
+        "placeholder": "Descrição do produto"
+      }
+    },
+    "price": {
+      "type": "Number",
+      "config": {
+        "label": "Preço",
+        "placeholder": "12.90"
+      }
+    },
+    "original_price": {
+      "type": "Number",
+      "config": {
+        "label": "Preço Original (opcional)",
+        "placeholder": "15.90"
+      }
+    },
+    "category": {
+      "type": "Link",
+      "config": {
+        "select": "document",
+        "customtypes": [
+          "category"
+        ],
+        "label": "Categoria"
+      }
+    },
+    "image": {
+      "type": "Image",
+      "config": {
+        "constraint": {
+          "width": 400,
+          "height": 400
+        },
+        "thumbnails": [
+          {
+            "name": "thumbnail",
+            "width": 200,
+            "height": 200
+          }
+        ],
+        "label": "Imagem do Produto"
+      }
+    },
+    "gallery": {
+      "type": "Group",
+      "config": {
+        "fields": {
+          "image": {
+            "type": "Image",
+            "config": {
+              "constraint": {
+                "width": 800,
+                "height": 800
+              },
+              "label": "Imagem"
+            }
+          }
+        },
+        "label": "Galeria de Imagens"
+      }
+    },
+    "rating": {
+      "type": "Number",
+      "config": {
+        "label": "Avaliação (1-5)",
+        "placeholder": "4.5",
+        "min": 1,
+        "max": 5
+      }
+    },
+    "alcohol_content": {
+      "type": "Text",
+      "config": {
+        "label": "Teor Alcoólico",
+        "placeholder": "5.2%"
+      }
+    },
+    "volume": {
+      "type": "Text",
+      "config": {
+        "label": "Volume",
+        "placeholder": "350ml"
+      }
+    },
+    "brand": {
+      "type": "Text",
+      "config": {
+        "label": "Marca",
+        "placeholder": "Cervejaria Artesanal"
+      }
+    },
+    "origin": {
+      "type": "Text",
+      "config": {
+        "label": "Origem",
+        "placeholder": "Brasil"
+      }
+    },
+    "featured": {
+      "type": "Boolean",
+      "config": {
+        "placeholder_false": "Não",
+        "placeholder_true": "Sim",
+        "default_value": false,
+        "label": "Produto em Destaque"
+      }
+    },
+    "available": {
+      "type": "Boolean",
+      "config": {
+        "placeholder_false": "Indisponível",
+        "placeholder_true": "Disponível",
+        "default_value": true,
+        "label": "Disponibilidade"
+      }
+    },
+    "stock": {
+      "type": "Number",
+      "config": {
+        "label": "Estoque",
+        "placeholder": "50"
+      }
+    },
+    "sort_order": {
+      "type": "Number",
+      "config": {
+        "label": "Ordem de Exibição",
+        "placeholder": "1"
+      }
+    }
+  },
+  "SEO": {
+    "meta_title": {
+      "type": "Text",
+      "config": {
+        "label": "Meta Title",
+        "placeholder": "Título para SEO"
+      }
+    },
+    "meta_description": {
+      "type": "Text",
+      "config": {
+        "label": "Meta Description",
+        "placeholder": "Descrição para SEO"
+      }
+    }
+  }
+}

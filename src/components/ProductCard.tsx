@@ -67,6 +67,8 @@ export default function ProductCard({ product }: ProductCardProps) {
 
   const itemQuantity = getItemQuantity(product.id);
 
+  console.log(product);
+
   return (
     <div className="bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 overflow-hidden group">
       {/* Product Image */}
@@ -111,7 +113,7 @@ export default function ProductCard({ product }: ProductCardProps) {
         )}
 
         {/* Stock Status */}
-        {!product.inStock && (
+        {!product.stock && (
           <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
             <span className="bg-red-600 text-white px-4 py-2 rounded-lg font-semibold">
               Fora de Estoque
@@ -178,13 +180,13 @@ export default function ProductCard({ product }: ProductCardProps) {
         {/* Add to Cart Button */}
         <button
           onClick={handleAddToCart}
-          disabled={!product.inStock || isAdding}
-          className={`w-full py-3 px-4 rounded-lg font-semibold transition-all duration-200 ${product.inStock && !isAdding
+          disabled={!product.stock || isAdding}
+          className={`w-full py-3 px-4 rounded-lg font-semibold transition-all duration-200 ${product.stock && !isAdding
             ? 'bg-amber-600 hover:bg-amber-700 text-white shadow-md hover:shadow-lg transform hover:-translate-y-0.5'
             : 'bg-gray-300 text-gray-500 cursor-not-allowed'
             }`}
         >
-          {!product.inStock ? (
+          {!product.stock ? (
             'Indisponível'
           ) : isAdding ? (
             <span className="flex items-center justify-center gap-2">
