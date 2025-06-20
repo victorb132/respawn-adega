@@ -31,7 +31,7 @@ export interface Category {
 
 // Novos tipos para Prismic
 export interface PrismicCategory {
-  uid: string;
+  uid: string | null;
   data: {
     name: prismic.KeyTextField;
     description: prismic.KeyTextField;
@@ -44,7 +44,7 @@ export interface PrismicCategory {
 }
 
 export interface PrismicProduct {
-  uid: string;
+  uid: string | null;
   data: {
     name: prismic.KeyTextField;
     description: prismic.KeyTextField;
@@ -70,7 +70,11 @@ export interface PrismicProduct {
 }
 
 // Funções de conversão do Prismic para tipos locais
-export function convertPrismicCategory(prismicCategory: PrismicCategory): Category {
+export function convertPrismicCategory(prismicCategory: PrismicCategory): Category | null {
+  if (!prismicCategory.uid) {
+    return null;
+  }
+
   return {
     id: prismicCategory.uid,
     name: prismicCategory.data.name || '',
@@ -82,7 +86,11 @@ export function convertPrismicCategory(prismicCategory: PrismicCategory): Catego
   };
 }
 
-export function convertPrismicProduct(prismicProduct: PrismicProduct, categories: Category[] = []): Product {
+export function convertPrismicProduct(prismicProduct: PrismicProduct, categories: Category[] = []): Product | null {
+  if (!prismicProduct.uid) {
+    return null;
+  }
+
   // Encontrar a categoria correspondente
   const categoryUid = prismicProduct.data.category?.uid;
   const category = categories.find(cat => cat.id === categoryUid);
@@ -138,3 +146,15 @@ export interface FilterOptions {
   featured: boolean;
 }
 
+
+
+export interface DeliveryAddress {
+  street: string;
+  number: string;
+  complement?: string;
+  neighborhood: string;
+  city: string;
+  state: string;
+  zipCode: string;
+  reference?: string;
+}

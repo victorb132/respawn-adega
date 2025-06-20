@@ -23,7 +23,9 @@ export async function getCategories(): Promise<Category[]> {
       ]
     });
 
-    return response.map((category: PrismicCategory) => convertPrismicCategory(category));
+    return response
+      .map((category: any) => convertPrismicCategory(category as PrismicCategory))
+      .filter((category): category is Category => category !== null);
   } catch (error) {
     console.error('Erro ao buscar categorias do Prismic:', error);
     // Fallback para dados mock em caso de erro
@@ -49,9 +51,9 @@ export async function getProducts(): Promise<Product[]> {
       ]
     });
 
-    return response.map((product: PrismicProduct) =>
-      convertPrismicProduct(product, categories)
-    );
+    return response
+      .map((product: any) => convertPrismicProduct(product as PrismicProduct, categories))
+      .filter((product): product is Product => product !== null);
   } catch (error) {
     console.error('Erro ao buscar produtos do Prismic:', error);
     // Fallback para dados mock em caso de erro
@@ -78,9 +80,9 @@ export async function getProductsByCategory(categoryUid: string): Promise<Produc
       ]
     });
 
-    return response.map((product: PrismicProduct) =>
-      convertPrismicProduct(product, categories)
-    );
+    return response
+      .map((product: any) => convertPrismicProduct(product as PrismicProduct, categories))
+      .filter((product): product is Product => product !== null);
   } catch (error) {
     console.error('Erro ao buscar produtos por categoria do Prismic:', error);
     return [];
@@ -105,9 +107,9 @@ export async function getFeaturedProducts(): Promise<Product[]> {
       ]
     });
 
-    return response.map((product: PrismicProduct) =>
-      convertPrismicProduct(product, categories)
-    );
+    return response
+      .map((product: any) => convertPrismicProduct(product as PrismicProduct, categories))
+      .filter((product): product is Product => product !== null);
   } catch (error) {
     console.error('Erro ao buscar produtos em destaque do Prismic:', error);
     return [];
@@ -130,7 +132,9 @@ export async function getFeaturedCategories(): Promise<Category[]> {
       ]
     });
 
-    return response.map((category: PrismicCategory) => convertPrismicCategory(category));
+    return response
+      .map((category: any) => convertPrismicCategory(category as PrismicCategory))
+      .filter((category): category is Category => category !== null);
   } catch (error) {
     console.error('Erro ao buscar categorias em destaque do Prismic:', error);
     return [];

@@ -168,7 +168,7 @@ export default function AddressForm({ onSubmit, onCancel, initialData }: Address
   };
 
   return (
-    <div className="h-full flex flex-col bg-white" style={{ height: '100vh', height: '100dvh' }}>
+    <div className="h-full flex flex-col bg-white" style={{ height: '100dvh' }}>
       {/* Header - Fixed */}
       <div className="flex-shrink-0 flex items-center justify-between p-4 sm:p-6 border-b border-gray-200 bg-gradient-to-r from-amber-600 to-orange-600">
         <h2 className="text-lg sm:text-xl font-bold text-white">
