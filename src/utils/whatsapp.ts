@@ -2,11 +2,10 @@ import { CartItem, CustomerInfo } from '@/types';
 
 // Configurações do WhatsApp
 export const WHATSAPP_CONFIG = {
-  // Substitua pelo número real da loja (formato: código do país + DDD + número)
-  phoneNumber: '5511999999999', // Exemplo: Brasil (55) + São Paulo (11) + número
-  businessName: 'DrinkShop',
-  businessAddress: 'Rua das Bebidas, 123 - Centro, São Paulo - SP',
-  businessHours: 'Segunda a Sexta: 8h às 22h | Sábado: 8h às 20h',
+  phoneNumber: '551111932925684',
+  businessName: "RespawN'Adega",
+  businessAddress: 'Rua Renê Juste, 57 - Jardim Zilda 04856-385',
+  businessHours: '24 horas',
 };
 
 // Função para formatar preço

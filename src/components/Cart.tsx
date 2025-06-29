@@ -132,13 +132,13 @@ export default function Cart() {
         ) : (
           <>
             {/* Header - Fixed */}
-            <div className="flex-shrink-0 flex items-center justify-between p-4 sm:p-6 border-b border-gray-200 bg-gradient-to-r from-amber-600 to-orange-600">
+            <div className="flex-shrink-0 flex items-center justify-between p-4 sm:p-6 border-b border-gray-200 bg-gradient-to-r foreground-default">
               <h2 className="text-lg sm:text-xl font-bold text-white">
                 Carrinho ({getTotalItems()})
               </h2>
               <button
                 onClick={toggleCart}
-                className="p-2 text-white hover:text-amber-200 transition-colors rounded-full hover:bg-white hover:bg-opacity-20"
+                className="p-2 text-white hover:text-[#00170d] transition-colors rounded-full hover:bg-white hover:bg-opacity-20"
                 aria-label="Fechar carrinho"
               >
                 <svg className="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -194,9 +194,11 @@ export default function Cart() {
                             <h4 className="font-semibold text-gray-900 text-xs sm:text-sm line-clamp-2 mb-1">
                               {item.product.name}
                             </h4>
-                            <p className="text-xs text-gray-500 mb-2">
-                              {item.product.volume} • {item.product.brand}
-                            </p>
+                            {item.product.volume || item.product.brand && (
+                              <p className="text-xs text-gray-500 mb-2">
+                                {item.product.volume} • {item.product.brand}
+                              </p>
+                            )}
 
                             {/* Quantity Controls */}
                             <div className="flex items-center justify-between">
@@ -241,7 +243,7 @@ export default function Cart() {
                               <span className="text-xs sm:text-sm text-gray-600">
                                 {formatPrice(item.product.price)} cada
                               </span>
-                              <span className="font-bold text-amber-600 text-sm">
+                              <span className="font-bold text-[#00170d] text-sm">
                                 {formatPrice(item.product.price * item.quantity)}
                               </span>
                             </div>

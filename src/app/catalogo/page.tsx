@@ -90,9 +90,6 @@ export default function CatalogoPage() {
         {/* Header */}
         <div className="mb-6">
           <h1 className="text-3xl font-bold text-gray-900 mb-3">Catálogo de Produtos</h1>
-          <p className="text-lg text-gray-600">
-            Descubra nossa seleção completa de bebidas
-          </p>
         </div>
 
         {/* Botão de Filtros */}

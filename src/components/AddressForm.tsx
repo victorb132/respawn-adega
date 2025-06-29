@@ -170,7 +170,7 @@ export default function AddressForm({ onSubmit, onCancel, initialData }: Address
   return (
     <div className="h-full flex flex-col bg-white" style={{ height: '100dvh' }}>
       {/* Header - Fixed */}
-      <div className="flex-shrink-0 flex items-center justify-between p-4 sm:p-6 border-b border-gray-200 bg-gradient-to-r from-amber-600 to-orange-600">
+      <div className="flex-shrink-0 flex items-center justify-between p-4 sm:p-6 border-b border-gray-200 bg-gradient-to-r background-default">
         <h2 className="text-lg sm:text-xl font-bold text-white">
           📍 Endereço de Entrega
         </h2>
@@ -409,7 +409,7 @@ export default function AddressForm({ onSubmit, onCancel, initialData }: Address
             type="submit"
             onClick={handleSubmit}
             disabled={isSubmitting}
-            className="w-full sm:flex-1 bg-amber-600 hover:bg-amber-700 disabled:bg-amber-400 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-lg font-semibold transition-colors flex items-center justify-center gap-2 text-sm sm:text-base"
+            className="w-full sm:flex-1 bg-[#00170d] hover:bg-[#003d1f] disabled:bg-gray-300 text-white disabled:text-black px-4 sm:px-6 py-2 sm:py-3 rounded-lg font-semibold transition-colors flex items-center justify-center gap-2 text-sm sm:text-base"
           >
             {isSubmitting ? (
               <>
