@@ -26,7 +26,7 @@ export default function Header() {
             {/* Cart Icon */}
             <button
               onClick={toggleCart}
-              className="cursor-pointer relative p-2 text-white hover:text-amber-200 transition-colors group"
+              className="cursor-pointer relative p-2 text-white hover:text-[#00170d] transition-colors group"
             >
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4m0 0L7 13m0 0l-2.5 5M7 13l2.5 5m0 0h8" />
@@ -44,7 +44,7 @@ export default function Header() {
             {/* Mobile Menu Button */}
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="md:hidden p-2 text-white hover:text-amber-200 transition-colors"
+              className="md:hidden p-2 text-white hover:text-[#00170d] transition-colors"
             >
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 {isMenuOpen ? (
@@ -59,7 +59,7 @@ export default function Header() {
 
         {/* Mobile Navigation */}
         {isMenuOpen && (
-          <nav className="md:hidden mt-4 pb-4 border-t border-amber-500">
+          <nav className="md:hidden mt-4 pb-4 border-t border-[#00170d]">
             <div className="flex flex-col space-y-2 pt-4">
               {/* <Link
                 href="/"
@@ -70,14 +70,14 @@ export default function Header() {
               </Link> */}
               <Link
                 href="/"
-                className="text-white hover:text-amber-200 transition-colors font-medium py-2"
+                className="text-white hover:text-[#00170d] transition-colors font-medium py-2"
                 onClick={() => setIsMenuOpen(false)}
               >
                 Catálogo
               </Link>
               <Link
                 href="/sobre"
-                className="text-white hover:text-amber-200 transition-colors font-medium py-2"
+                className="text-white hover:text-[#00170d] transition-colors font-medium py-2"
                 onClick={() => setIsMenuOpen(false)}
               >
                 Sobre

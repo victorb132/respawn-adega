@@ -15,6 +15,7 @@ export default function CatalogoPage() {
   const [selectedCategory, setSelectedCategory] = useState('');
   const [priceRange, setPriceRange] = useState<[number, number]>([0, 200]);
   const [sortBy, setSortBy] = useState('name');
+  const [filtersOpen, setFiltersOpen] = useState(false);
 
   // Carregar dados do Prismic
   useEffect(() => {
@@ -87,15 +88,36 @@ export default function CatalogoPage() {
     <div className="min-h-screen bg-gray-50 py-8">
       <div className="max-w-7xl mx-auto px-4">
         {/* Header */}
-        <div className="mb-8">
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">Catálogo de Produtos</h1>
-          <p className="text-xl text-gray-600">
+        <div className="mb-6">
+          <h1 className="text-3xl font-bold text-gray-900 mb-3">Catálogo de Produtos</h1>
+          <p className="text-lg text-gray-600">
             Descubra nossa seleção completa de bebidas
           </p>
         </div>
 
+        {/* Botão de Filtros */}
+        <div className="mb-4">
+          <button
+            onClick={() => setFiltersOpen(!filtersOpen)}
+            className="flex items-center gap-2 bg-[#00170d] text-white px-4 py-2 rounded-lg hover:bg-[#003d1f] transition-colors"
+          >
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" />
+            </svg>
+            Filtros
+            <svg
+              className={`w-4 h-4 transition-transform ${filtersOpen ? 'rotate-180' : ''}`}
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+        </div>
+
         {/* Filtros */}
-        <div className="bg-white rounded-lg shadow-md p-6 mb-8">
+        <div className={`bg-white rounded-lg shadow-md p-4 mb-6 transition-all duration-300 ${filtersOpen ? 'block' : 'hidden'}`}>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
             {/* Busca */}
             <div>
@@ -107,7 +129,7 @@ export default function CatalogoPage() {
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 placeholder="Digite o nome do produto..."
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent"
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#00170d] focus:border-transparent"
               />
             </div>
 
@@ -119,7 +141,7 @@ export default function CatalogoPage() {
               <select
                 value={selectedCategory}
                 onChange={(e) => setSelectedCategory(e.target.value)}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent"
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#00170d] focus:border-transparent"
               >
                 <option value="">Todas as categorias</option>
                 {categories.map((category) => (
@@ -163,7 +185,7 @@ export default function CatalogoPage() {
               <select
                 value={sortBy}
                 onChange={(e) => setSortBy(e.target.value)}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent"
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#00170d] focus:border-transparent"
               >
                 <option value="name">Nome (A-Z)</option>
                 <option value="price-asc">Menor preço</option>
@@ -180,7 +202,7 @@ export default function CatalogoPage() {
             </span>
             <button
               onClick={clearFilters}
-              className="text-amber-600 hover:text-amber-700 font-medium text-sm"
+              className="text-[#00170d] hover:text-[#003d1f] font-medium text-sm"
             >
               Limpar filtros
             </button>
@@ -189,7 +211,7 @@ export default function CatalogoPage() {
 
         {/* Grid de Produtos */}
         {filteredProducts.length > 0 ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
             {filteredProducts.map((product) => (
               <ProductCard key={product.id} product={product} />
             ))}
@@ -205,7 +227,7 @@ export default function CatalogoPage() {
             </p>
             <button
               onClick={clearFilters}
-              className="bg-amber-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-amber-700 transition-colors"
+              className="bg-[#00170d] text-white px-6 py-3 rounded-lg font-semibold hover:bg-[#003d1f] transition-colors"
             >
               Limpar filtros
             </button>
@@ -224,8 +246,8 @@ export default function CatalogoPage() {
                   key={category.id}
                   onClick={() => setSelectedCategory(category.name)}
                   className={`p-4 rounded-lg border-2 transition-all duration-200 ${selectedCategory === category.name
-                    ? 'border-amber-500 bg-amber-50'
-                    : 'border-gray-200 hover:border-amber-300 bg-white'
+                    ? 'border-[#00170d] bg-[#00170d]/10'
+                    : 'border-gray-200 hover:border-[#00170d]/50 bg-white'
                     }`}
                   style={{
                     backgroundColor: selectedCategory === category.name

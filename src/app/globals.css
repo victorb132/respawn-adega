@@ -32,12 +32,12 @@ html {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #d97706;
+  background: #00170d;
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #b45309;
+  background: #003d1f;
 }
 
 /* Line clamp utilities */
@@ -114,7 +114,7 @@ html {
 
 /* Focus styles */
 .focus-ring {
-  @apply focus:outline-none focus:ring-2 focus:ring-amber-500 focus:ring-offset-2;
+  @apply focus:outline-none focus:ring-2 focus:ring-[#00170d] focus:ring-offset-2;
 }
 
 /* Glass effect */
@@ -137,7 +137,7 @@ html {
 }
 
 .foreground-default {
-  background: rgba(182,100,13,255);
+  background: #00170d;
 }
 
 /* Custom shadows */
